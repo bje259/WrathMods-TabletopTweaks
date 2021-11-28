@@ -16,6 +16,11 @@
           "Homebrew": true,
           "Description": "Aeon Bane adds mythic rank to spell resistance checks."
         },
+        "AeonBaneAction": {
+          "Enabled": true,
+          "Homebrew": true,
+          "Description": "Aeon Bane adds mythic rank to spell resistance checks."
+        },
         "AeonBaneUses": {
           "Enabled": true,
           "Homebrew": true,

@@ -10,7 +10,6 @@ using System.Linq;
 using TabletopTweaks.Config;
 using TabletopTweaks.Extensions;
 using TabletopTweaks.NewComponents.Prerequisites;
-using TabletopTweaks.Utilities;
 
 namespace TabletopTweaks.Bugfixes.Classes {
     static class Loremaster {
@@ -111,7 +110,13 @@ namespace TabletopTweaks.Bugfixes.Classes {
 
                     LoremasterProgression.LevelEntries = LoremasterProgression.LevelEntries
                         .Where(entry => entry.Level != 1)
-                        .Append(Helpers.CreateLevelEntry(1, LoremasterSpellbookSelectionTTT, LoremasterSecretSelection)).ToArray();
+                        .Append(new LevelEntry {
+                            m_Features = new List<BlueprintFeatureBaseReference>() {
+                                LoremasterSpellbookSelectionTTT.ToReference<BlueprintFeatureBaseReference>(),
+                                LoremasterSecretSelection.ToReference<BlueprintFeatureBaseReference>()
+                            },
+                            Level = 1
+                        }).ToArray();
                     Main.LogPatch("Patched", LoremasterProgression);
                 }
 
