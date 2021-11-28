@@ -48,7 +48,7 @@ namespace TabletopTweaks.MythicReworks {
                 Main.LogHeader("Aeon Rework");
 
                 PatchAeonBaneIcon();
-                PatchAeonBaneAction();
+                //PatchAeonBaneAction();
                 PatchAeonBaneSpellResistance();
                 PatchAeonBaneUses();
                 PatchAeonImprovedBaneDispelLimit();
