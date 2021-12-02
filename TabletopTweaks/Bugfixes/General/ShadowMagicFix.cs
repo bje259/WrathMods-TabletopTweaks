@@ -22,6 +22,19 @@ using TabletopTweaks.Utilities;
 
 namespace TabletopTweaks.Bugfixes.General {
     class ShadowMagicFix {
+        [HarmonyPatch(typeof(AutoMetamagic), nameof(AutoMetamagic.ShouldApplyTo), new Type[] { 
+            typeof(AutoMetamagic),
+            typeof(BlueprintAbility),
+            typeof(AbilityData)
+        })]
+        static class AutoMetamagic_ShouldApplyTo_Shadow_Patch {
+            static void Postfix(AutoMetamagic c, BlueprintAbility ability, AbilityData data, ref bool __result) {
+                if (ModSettings.Fixes.BaseFixes.IsDisabled("FixShadowSpells")) { return; }
+                if (data?.ConvertedFrom?.Blueprint?.GetComponent<AbilityShadowSpell>() != null) {
+                    __result |= AutoMetamagic.ShouldApplyTo(c, data.ConvertedFrom.Blueprint, data.ConvertedFrom);
+                }
+            }
+        }
         [HarmonyPatch(typeof(IncreaseSpellDescriptorDC), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
         static class IncreaseSpellDescriptorDC_OnEventAboutToTrigger_Shadow_Patch {
             static bool Prefix(IncreaseSpellDescriptorDC __instance, RuleCalculateAbilityParams evt) {
