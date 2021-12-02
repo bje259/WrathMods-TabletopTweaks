@@ -47,6 +47,7 @@ namespace TabletopTweaks.Bugfixes.Items {
                     if (ModSettings.Fixes.Items.Equipment.IsDisabled("HalfOfThePair")) { return; }
 
                     var HalfOfPairedPendantArea = Resources.GetBlueprint<BlueprintAbilityAreaEffect>("8187fd9306b8c4f46824fbba9808f458");
+<<<<<<< HEAD
                     var HalfOfPairedPendantBuff = Resources.GetBlueprint<BlueprintBuff>("066229a41ae97d6439fea81ebf141528");
                     var HalfOfPairedPendantPersonalBuff = Resources.GetBlueprint<BlueprintBuff>("71a14bfc21b64ad4bbb916a7ad58effb");
                     HalfOfPairedPendantArea
@@ -73,6 +74,14 @@ namespace TabletopTweaks.Bugfixes.Items {
                             c.ToCaster = false;
                             c.AsChild = false;
                         });
+=======
+                    HalfOfPairedPendantArea
+                        .GetComponent<AbilityAreaEffectRunAction>()
+                        .Round = Helpers.CreateActionList();
+                    HalfOfPairedPendantArea.FlattenAllActions()
+                        .OfType<ContextActionApplyBuff>()
+                        .ForEach(c => c.ToCaster = false);
+>>>>>>> parent of 1c24633 (catchup)
                     HalfOfPairedPendantArea.FlattenAllActions()
                         .OfType<ContextActionRemoveBuff>()
                         .ForEach(c => c.ToCaster = false);

@@ -5,7 +5,11 @@
 * Cleanups for dynamic item naming
 * Magus now gets its missing "Burst" enchantments
 * Activatabilies should now correctly turn off when they run out of charges
+<<<<<<< HEAD
 * Half of the Pair should now more accurately update with range changes
+=======
+* Half of the Pair should now more accuratly update with range changes
+>>>>>>> parent of 1c24633 (catchup)
 
 ## Version 1.10.1
 * Chinese localization from @1onepower
