@@ -1,13 +1,24 @@
 ﻿using HarmonyLib;
 using Kingmaker.Blueprints;
+using Kingmaker.Blueprints.Classes;
 using Kingmaker.Blueprints.Classes.Spells;
 using Kingmaker.Designers.Mechanics.Facts;
+using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules.Abilities;
+using Kingmaker.UnitLogic.Abilities;
+using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.Abilities.Components;
+using Kingmaker.UnitLogic.Buffs;
+using Kingmaker.UnitLogic.Buffs.Blueprints;
 using Kingmaker.UnitLogic.Parts;
+using Kingmaker.UnitLogic.Mechanics;
+using Kingmaker.UnitLogic.Mechanics.Components;
+using Kingmaker.UnitLogic.Mechanics.Properties;
 using System;
 using System.Linq;
 using TabletopTweaks.Config;
+using TabletopTweaks.Extensions;
+using TabletopTweaks.Utilities;
 
 namespace TabletopTweaks.Bugfixes.General {
     class ShadowMagicFix {
@@ -51,6 +62,79 @@ namespace TabletopTweaks.Bugfixes.General {
                 return false;
             }
         }
+
+        [HarmonyPatch(typeof(AutoMetamagic), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
+
+        static class AutoMetamagic_OnEventAboutToTrigger_Shadow_Patch {
+
+            static bool Prefix(AutoMetamagic __instance, RuleCalculateAbilityParams evt) {
+                if (ModSettings.Fixes.BaseFixes.IsDisabled("FixShadowSpells")) { return true; }
+                var spell = evt.Spell;
+                var ParentAbility = evt.AbilityData?.ConvertedFrom;
+                if (ParentAbility?.Blueprint?.GetComponent<AbilityShadowSpell>() != null) {
+                    spell = ParentAbility.Blueprint;
+                    //empower
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("a0e8e970756146c99cbe1c611e6deecd")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("a0e8e970756146c99cbe1c611e6deecd");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Empower);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //extend
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("ad00aeea70a548aaa4b213038c9d8963")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("ad00aeea70a548aaa4b213038c9d8963");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Extend);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //selective
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("fac1de8143b945aaa1d48d30d25066c2")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("fac1de8143b945aaa1d48d30d25066c2");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Selective);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //reach
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("985da6a662924b22aaf02cf059315aa1")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("985da6a662924b22aaf02cf059315aa1");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Reach);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //quickened
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("f44bbc18206641099c08913c8663b614")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("f44bbc18206641099c08913c8663b614");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Quicken);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //max
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("dfade9d3bd314bf788ab58dd7716e0f3")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("dfade9d3bd314bf788ab58dd7716e0f3");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Maximize);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+                    //persistent
+                    if (__instance.Owner.Buffs.GetBuff(Resources.GetBlueprint<BlueprintBuff>("6319ef758d444b0fa7bdaf0482fddf02")) != null) {
+                        var IllusionMetaEmpower = Resources.GetBlueprint<BlueprintBuff>("6319ef758d444b0fa7bdaf0482fddf02");
+                        IllusionMetaEmpower.GetComponent<AutoMetamagic>().School = spell.School;
+                        evt.AddMetamagic(Metamagic.Persistent);
+                        //evt.AddMetamagic(Kingmaker.UnitLogic.Abilities.Metamagic.Empower);
+                        //Main.LogDebug($"Tried to add Metamagic1");
+                    }
+
+                }
+                return false;
+            }
+        }
+
         [HarmonyPatch(typeof(SpellFocusParametrized), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
         static class SpellFocusParametrized_OnEventAboutToTrigger_Shadow_Patch {
 
