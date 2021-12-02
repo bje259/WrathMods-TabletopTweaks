@@ -76,7 +76,7 @@ namespace TabletopTweaks.Bugfixes.General {
             }
         }
 
-        [HarmonyPatch(typeof(AutoMetamagic), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
+        /*[HarmonyPatch(typeof(AutoMetamagic), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
 
         static class AutoMetamagic_OnEventAboutToTrigger_Shadow_Patch {
 
@@ -146,7 +146,7 @@ namespace TabletopTweaks.Bugfixes.General {
                 }
                 return false;
             }
-        }
+        }*/
 
         [HarmonyPatch(typeof(SpellFocusParametrized), "OnEventAboutToTrigger", new Type[] { typeof(RuleCalculateAbilityParams) })]
         static class SpellFocusParametrized_OnEventAboutToTrigger_Shadow_Patch {
