@@ -790,6 +790,11 @@
         "Homebrew": false,
         "Description": "Fixes the magic gore's damage multiplier to be 1.5 instead of 0.5"
       },
+      "FavoriteMetamagic": {
+        "Enabled": true,
+        "Homebrew": false,
+        "Description": "Fixes the missing favorite selective metamagic"
+      },
       "EnduringSpells": {
         "Enabled": true,
         "Homebrew": false,

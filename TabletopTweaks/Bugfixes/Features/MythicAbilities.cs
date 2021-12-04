@@ -12,6 +12,7 @@ using Kingmaker.Items;
 using Kingmaker.RuleSystem;
 using Kingmaker.RuleSystem.Rules.Damage;
 using Kingmaker.UnitLogic;
+using Kingmaker.UnitLogic.FactLogic;
 using Kingmaker.UnitLogic.Mechanics;
 using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.Utility;
@@ -35,6 +36,23 @@ namespace TabletopTweaks.Bugfixes.Features {
                 PatchBloodragerSecondBloodline();
                 PatchMythicCharge();
                 PatchCloseToTheAbyss();
+                PatchFavoriteMetamagic();
+            }
+
+            static void PatchFavoriteMetamagic() {
+                if (ModSettings.Fixes.MythicAbilities.IsDisabled("FavoriteMetamagic")) { return; }
+                var FavoriteMetamagicSelection = Resources.GetBlueprint<BlueprintFeatureSelection>("503fb196aa222b24cb6cfdc9a284e838");
+                var FavoriteMetamagicSelective = Helpers.CreateBlueprint<BlueprintFeature>("FavoriteMetamagicSelective", bp => {
+                    bp.IsClassFeature = true;
+                    bp.SetName("Favorite Metamagic — Selective");
+                    bp.SetDescription("You can now use your mythic powers to fuel your metamagic abilities.\nBenefit: Select one kind of metamagic. The {g|Encyclopedia:Spell}spell{/g} level cost for its use decreases by one (to a minimum of 0).");
+                    bp.AddComponent<AddMechanicsFeature>(c => {
+                        c.m_Feature = AddMechanicsFeature.MechanicsFeatureType.FavoriteMetamagicSelective;
+                    });
+                    bp.AddPrerequisiteFeature(Resources.GetBlueprint<BlueprintFeature>("85f3340093d144dd944fff9a9adfd2f2").ToReference<BlueprintFeatureReference>());
+                });
+                FavoriteMetamagicSelection.AddFeatures(FavoriteMetamagicSelective);
+                Main.LogPatch("Patched", FavoriteMetamagicSelection);
             }
             static void PatchCloseToTheAbyss() {
                 if (ModSettings.Fixes.MythicAbilities.IsDisabled("CloseToTheAbyss")) { return; }
