@@ -93,6 +93,11 @@
         "Homebrew": false,
         "Description": "Prevents extra dice from empowered metamagic from being maximized by maximize metamagic."
       },
+      "MountedActions": {
+        "Enabled": true,
+        "Homebrew": false,
+        "Description": "Prevents full round actions after moving while mounted."
+      },
       "SelectiveMetamagicNonInstantaneous": {
         "Enabled": true,
         "Homebrew": false,
@@ -740,6 +745,11 @@
         "Homebrew": false,
         "Description": "Now only works on one handed weapons always."
       },
+      "Lunge": {
+        "Enabled": true,
+        "Homebrew": false,
+        "Description": "Now is available as a feat."
+      },
       "IndomitableMount": {
         "Enabled": true,
         "Homebrew": false,
@@ -764,6 +774,16 @@
         "Enabled": true,
         "Homebrew": false,
         "Description": "Allows any spell with a saving throw to be made persistant."
+      },
+      "SelectiveMetamagic": {
+        "Enabled": true,
+        "Homebrew": false,
+        "Description": "Retags selective spells to exclude non instantaneous spells."
+      },
+      "SelectivePrerequisites": {
+        "Enabled": true,
+        "Homebrew": false,
+        "Description": "Now requires 10 ranks of knowledge arcana."
       },
       "ShatterDefenses": {
         "Enabled": true,
